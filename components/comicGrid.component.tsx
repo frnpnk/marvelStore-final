@@ -19,7 +19,7 @@ const ComicGrid: FC<Props> = ({ results }) => {
     <>
       <Grid container spacing={2}>
         {results?.map((d) => (
-          <>
+          
             <Grid item xs={12} md={4} key={d.id}>
               <Card sx={{ minWidth: 400 }}>
                 <CardMedia
@@ -45,7 +45,7 @@ const ComicGrid: FC<Props> = ({ results }) => {
                 </CardActions>
               </Card>
             </Grid>
-          </>
+        
         ))}
       </Grid>
     </>
