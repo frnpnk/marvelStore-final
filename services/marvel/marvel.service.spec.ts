@@ -1,9 +1,10 @@
-import {getCharacter, getComic, getComics} from "dh-marvel/services/marvel/marvel.service";
+import {getCharacter, getCharacters, getComic, getComics} from "dh-marvel/services/marvel/marvel.service";
 import comics from "dh-marvel/test/mocks/comics";
 import character from "dh-marvel/test/mocks/character";
 import comic from "dh-marvel/test/mocks/comic";
 import comicsWithOffsetAndLimit from "dh-marvel/test/mocks/comicsWithOffsetAndLimit";
 import comicWithoutStock from "dh-marvel/test/mocks/comicWithoutStock";
+import characters from "dh-marvel/test/mocks/characters";
 
 describe('MarvelService', () => {
     beforeEach(() => {
@@ -64,6 +65,15 @@ describe('MarvelService', () => {
             it('should return a null response', async () => {
                 const data = await getCharacter(99);
                 expect(data).toBeNull()
+            })
+        })
+    })
+
+    describe('when fetching characters', () => {
+        describe('when characters was found', () => {
+            it('should return an array of characters', async () => {
+                const data = await getCharacters();
+                expect(data).toStrictEqual(characters)
             })
         })
     })

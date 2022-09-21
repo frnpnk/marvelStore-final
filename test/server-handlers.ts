@@ -4,6 +4,7 @@ import character from "dh-marvel/test/mocks/character";
 import comic from "dh-marvel/test/mocks/comic";
 import comicsWithOffsetAndLimit from "dh-marvel/test/mocks/comicsWithOffsetAndLimit";
 import comicWithoutStock from "dh-marvel/test/mocks/comicWithoutStock";
+import characters from './mocks/characters';
 
 const handlers = [
     rest.get('/marvel/api/comics', async (req, res, ctx) => {
@@ -23,6 +24,12 @@ const handlers = [
         const id = req.params.id
         if (id === "1") return res(ctx.json({data: {results: [character]}}))
         return res(ctx.json({data: {results: []}}))
+    }),
+    rest.get('/marvel/api/characters', async (req, res, ctx) => {
+        return res(ctx.json({data: {results: characters}}))
+       
+
+
     }),
 ]
 

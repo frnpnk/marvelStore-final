@@ -1,5 +1,5 @@
 import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Grid from "@mui/material/Grid";
 import {
@@ -17,36 +17,22 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 let firstComic = 0;
 let quantityComic = 12;
-export async function getStaticPaths(): Promise<any> {
-  const res = await getComics(firstComic, quantityComic);
 
-  const paths = res.data.results.map((e: any) => ({
-    params: {
-      id: `${e.id}`,
-    },
-  }));
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  
+   const comic = await getComic(Number(query.id));
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let tonum = params?.id;
-  const comic = await getComic(Number(tonum));
-  console.log("comic data " + comic);
-  console.log(comic.id, comic.title);
 
   return {
     props: {
-      id: params?.id,
+      id: query,
       comicDetail: comic,
     },
-    revalidate: 60,
   };
 };
 
@@ -63,17 +49,17 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Grid container spacing={2}>
-        <Container xs="12" alignItems="center" >
-          <Typography alingText="Center" variant="h3" color="initial">
+      <Container >
+          <Typography>
             {comicDetail.title}
           </Typography>
-        </Container>
+          </Container>
         
 
-        <Box xs={12} sm={6}>
+        <Box >
           <Image src={comicDetail.thumbnail.path + ".jpg"} width="185px" alt="book cover" height="350px" />
         </Box>
-      <Box xs={12} sm={6}>
+      <Box >
         <Card  sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography
@@ -93,10 +79,6 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
           </CardActions>
         </Card>
         </Box>
-      
-
-     
-
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -109,6 +91,29 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
             <Typography>
               {comicDetail.description||"sin descripcion diponible"}
             </Typography>
+          </AccordionDetails>
+        </Accordion>
+    
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>personajes</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            
+            {comicDetail.characters.items.map((e:any)=>(
+                  <Link href={`/personajes/${e.resourceURI.slice(47)}`   }key={e.resourceURI.slice(47)}>
+                    <Button>
+                    {e.name}
+                    </Button>
+                 
+              </Link>
+
+                )) || "sin descripcion diponible"}
+       
           </AccordionDetails>
         </Accordion>
       </Grid>

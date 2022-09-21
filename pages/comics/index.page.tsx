@@ -20,8 +20,6 @@ let quantityComic = 12;
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await getComics(firstComic, quantityComic);
-  //console.log(response.data.results)
-  //console.log(response.data);
 
   return {
     props: {
