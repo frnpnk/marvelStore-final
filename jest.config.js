@@ -9,6 +9,7 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
+    resolver: '<rootDir>/resolvers.js',
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
     moduleNameMapper: {
         // Handle module aliases (this will be automatically configured for you soon)

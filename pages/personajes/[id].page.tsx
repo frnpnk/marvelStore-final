@@ -98,4 +98,6 @@ const CharacterDetails: NextPage<Props> = ({ characterDetail }) => {
   );
 };
 
+(CharacterDetails as any).layout = LayoutGeneral
+
 export default CharacterDetails;
