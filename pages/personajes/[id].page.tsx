@@ -1,16 +1,11 @@
 import {
   getCharacter,
   getCharacters,
-  getComics,
 } from "dh-marvel/services/marvel/marvel.service";
 import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Grid from "@mui/material/Grid";
 import {
-  CardContent,
-  Button,
-  Card,
-  CardActions,
   Typography,
   Accordion,
   AccordionSummary,
