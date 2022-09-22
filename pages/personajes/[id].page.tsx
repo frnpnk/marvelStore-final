@@ -16,6 +16,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import Image from "next/image";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 export async function getStaticPaths(): Promise<any> {
   const res = await getCharacters();
