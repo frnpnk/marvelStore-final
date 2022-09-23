@@ -48,87 +48,84 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
       </Head>
 
       <Box mt={5} sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2} justifyContent="center">
+          <Grid xs={12}>
+            <Typography textAlign={"center"} variant="h2">
+              {comicDetail.title}
+            </Typography>
+          </Grid>
 
-
-      
-      <Grid container spacing={2}>
-        <Grid xs={12}>
-          <Typography>{comicDetail.title}</Typography>
-        </Grid>
-
-        <Grid xs={6} >
-          <Image
-            src={comicDetail.thumbnail.path + ".jpg"}
-            width="185px"
-            alt="book cover"
-            height="350px"
-          />
-        </Grid>
-        <Grid xs={6}>
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {comicDetail.title}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Antes: ${comicDetail.oldPrice}
-              </Typography>
-              <Typography variant="body2">${comicDetail.oldPrice}</Typography>
-            </CardContent>
-            <CardActions>
-              <Link href={`/checkout`}>
-                <Button size="small">
-                  COMPRAR
-                </Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Grid>
-
-        <Grid xs={7}>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Descripcion</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                {comicDetail.description || "sin descripcion diponible"}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        </Grid>
-
-        <Grid xs={7}>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>personajes</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {comicDetail.characters.items.map((e: any) => (
-                <Link
-                  href={`/personajes/${e.resourceURI.slice(47)}`}
-                  key={e.resourceURI.slice(47)}
+          <Grid xs={3} alignItems="center">
+            <Image
+              src={comicDetail.thumbnail.path + ".jpg"}
+              width="245px"
+              alt="book cover"
+              height="350px"
+            />
+          </Grid>
+          <Grid xs={4}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
                 >
-                  <Button>{e.name}</Button>
+                  {comicDetail.title}
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Antes: ${comicDetail.oldPrice}
+                </Typography>
+                <Typography variant="body2">${comicDetail.oldPrice}</Typography>
+              </CardContent>
+              <CardActions>
+                <Link href={`/checkout`}>
+                  <Button size="small">COMPRAR</Button>
                 </Link>
-              ))}
-            </AccordionDetails>
-          </Accordion>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid xs={7}>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>Descripcion</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  {comicDetail.description || "sin descripcion diponible"}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </Grid>
+
+          <Grid xs={7}>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>personajes</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {comicDetail.characters.items.map((e: any) => (
+                  <Link
+                    href={`/personajes/${e.resourceURI.slice(47)}`}
+                    key={e.resourceURI.slice(47)}
+                  >
+                    <Button>{e.name}</Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          </Grid>
         </Grid>
-      </Grid>
-      </Box>  
+      </Box>
     </>
   );
 };
