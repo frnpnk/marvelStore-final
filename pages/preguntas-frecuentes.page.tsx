@@ -1,15 +1,12 @@
 import type { NextPage } from "next";
-import { FC } from "react";
 import { FaqsType } from "dh-marvel/components/faqs/faqsData";
 import { faqsData } from "dh-marvel/components/faqs/faqsData";
 import Faqs from "dh-marvel/components/faqsComponent/faqs.component";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Head from "next/head";
+import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
 interface Props {
   data: FaqsType[];
@@ -51,5 +48,7 @@ const faqs: NextPage<Props> = (data) => {
     </>
   );
 };
+
+(faqs as any).layout = LayoutGeneral
 
 export default faqs;

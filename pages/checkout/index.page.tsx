@@ -1,15 +1,24 @@
-import CheckoutForm from "dh-marvel/components/checkout/old/CheckoutForm.component";
+import { FormContext } from "dh-marvel/components/checkout/context/FormContext";
 import StepperForm from "dh-marvel/components/checkout/stepperForm.Component";
 import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
-import React from "react";
+import React, { useState } from "react";
 
-const index = () => {
+
+const Index= () => {
+
+  const [activeStep, setActiveStep] = useState(0);
+
   return (
     <>
-      <StepperForm />
+      <FormContext.Provider value={{activeStep: activeStep, setActiveStep: setActiveStep}} >
+        <StepperForm />
+      </FormContext.Provider>
     </>
   );
 };
-(index as any).layout = LayoutCheckout
 
-export default index;
+
+
+(Index as any).layout = LayoutCheckout;
+
+export default Index;

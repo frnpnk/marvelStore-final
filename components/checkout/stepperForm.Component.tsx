@@ -1,63 +1,36 @@
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Stepper from "@mui/material/Stepper";
 import { Box, Stack, Step, StepLabel } from "@mui/material";
-import UserForm from "./userForm.component copy";
-import AdressForm from "./adressForm.component";
-import CardForm from "./cardForm.component";
+import UserForm from "./formUser.component";
+import AdressForm from "./formAdress.component";
+import CardForm from "./formCard.component";
+import FormNavigator from "./formNavigator.component";
+import { FormContext } from "./context/FormContext";
 
 const StepperForm = () => {
-  const [activeStep, setActiveStep] = useState(0);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-
+  const {activeStep, setActiveStep} = useContext(FormContext)
 
   return (
     <>
-      <Stepper activeStep={activeStep}>
-        <Step>
-          <StepLabel>Datos personales</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Datos de entrega</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Datos del pago</StepLabel>
-        </Step>
-      </Stepper>
+      <Box sx={{ width: "600px" }}>
+        <h2>Checkout</h2>
+        {activeStep === 0 && <UserForm />}
+        {activeStep === 1 && <AdressForm />}
+        {activeStep === 2 && <CardForm />}
 
-      <Stack>
-        <Button
-          color="inherit"
-          disabled={activeStep === 0}
-          onClick={handleBack}
-          sx={{ mr: 1 }}
-        >
-          Atras
-        </Button>
-
-        <Button
-          color="inherit"
-          onClick={/*activeStep === 2  ? {console.log("falta post")}  :*/  handleNext}
-          sx={{ mr: 1 }}
-        >
-          {activeStep === 2 ? "Comprar" : "Siguiente"}
-        </Button>
-      </Stack>
-      <Box>
-        {
-            <UserForm/>
-  
-    
-    
-        }
+        <Stepper activeStep={activeStep}>
+          <Step>
+            <StepLabel>Datos personales</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Datos de entrega</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Datos del pago</StepLabel>
+          </Step>
+        </Stepper>
+        <FormNavigator/>
       </Box>
     </>
   );
