@@ -13,10 +13,9 @@ interface Props{
 
 
 const BasicPagination: FC<Props> = (Props) => {
-   
   return (
     <Stack spacing={2}>
-      <Pagination count={Props.count}  />
+      <Pagination count={Props.count} page={Props.page} />
     </Stack>
   );
 }

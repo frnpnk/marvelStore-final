@@ -3,10 +3,9 @@ import Head from "next/head";
 import { getComics } from "dh-marvel/services/marvel/marvel.service";
 import ComicGrid from "dh-marvel/components/comicGrid.component";
 import Grid from "@mui/material/Grid";
-import BasicPagination from "dh-marvel/components/pagination.component";
-import { Box } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
-import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
+import { useEffect, useState } from "react";
 
 interface Props {
   comicsPage: {
@@ -20,8 +19,6 @@ interface Props {
 
 let firstComic = 0;
 let quantityComic = 12;
-
-//useEffect
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await getComics(firstComic, quantityComic);
@@ -37,6 +34,31 @@ export const getStaticProps: GetStaticProps = async () => {
 const Index: NextPage<Props> = ({ comicsPage }) => {
   let pages = Math.round(comicsPage.total / quantityComic);
 
+  const [comics, setComics] = useState(comicsPage);
+  const [page, setPage] = useState(1);
+  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    console.log(page);
+    console.log(offsetfirstComic);
+    
+  };
+  const offsetfirstComic =((page-1)* quantityComic );
+
+  useEffect(() => {
+    const url = "/api/comicMw?";
+    const params = new URLSearchParams();
+    params.set("offset", `${offsetfirstComic}`);
+    params.set("limit", `${quantityComic}`);
+    console.log(params.toString());
+    
+    fetch(url + params.toString())
+      .then((res) => res.json())
+      .then((data) => setComics(data.data))
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [page, offsetfirstComic]);
+
   return (
     <>
       <Head>
@@ -49,11 +71,11 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
           <Grid item xs={12} textAlign="center">
             <h1>Comics {}</h1>
           </Grid>
-          <Grid item xs={12} alignContent="center">
-            <BasicPagination count={pages} page={1} />
+          <Grid item xs={12} display='flex' justifyContent="center">
+            <Pagination count={pages} page={page} onChange={handleChange} />
           </Grid>
           <Grid item xs={10} alignItems="center"></Grid>
-          <ComicGrid results={comicsPage.results} />
+          <ComicGrid results={comics.results} />
         </Grid>
       </Box>
     </>

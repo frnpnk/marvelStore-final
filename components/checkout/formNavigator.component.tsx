@@ -14,7 +14,7 @@ const FormNavigator: FC<any> = () => {
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   return (
