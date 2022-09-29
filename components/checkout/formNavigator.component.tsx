@@ -10,11 +10,11 @@ const FormNavigator: FC<any> = () => {
   const { activeStep, setActiveStep } = useContext(FormContext);
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
+    setActiveStep((prevActiveStep :  number) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
   };
 
   return (
