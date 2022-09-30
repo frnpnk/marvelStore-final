@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import Stepper from "@mui/material/Stepper";
 import { Box, Step, StepLabel } from "@mui/material";
 import UserForm from "./forms/formUser.component";
@@ -6,7 +6,7 @@ import AddressForm from "./forms/formAddress.component";
 import CardForm from "./forms/formCard.component";
 import { FormContext } from "./context/FormContext";
 
-const StepperForm = () => {
+const StepperForm:FC = () => {
   const {activeStep, setActiveStep} = useContext(FormContext)
 
   return (
