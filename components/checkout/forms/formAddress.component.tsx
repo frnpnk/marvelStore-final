@@ -49,7 +49,7 @@ const AddressForm: FC = () => {
     resolver: yupResolver(addressSchema),
     defaultValues: {
       address1: "calle siempreviva",
-      address2: "16",
+      address2: "",
       city: "sin city",
       state: "sin state",
       zipCode: "6666"

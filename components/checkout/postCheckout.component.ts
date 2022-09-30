@@ -1,20 +1,17 @@
 import { CheckoutInput } from "dh-marvel/features/checkout/checkout.types";
-import { response } from "msw";
-import { FC } from "react";
 
 
 
 
-
-export const postCheckout = async (data: CheckoutInput) => {
-    await fetch("/api/checkout",
-        {
+export const postCheckout = async (data: CheckoutInput|any) => {
+    await fetch("/api/checkout", {
             method: "POST",
-            headers: { 'Content-Type': 'application/json',
+            headers: { 
+                'Content-Type': 'application/json',
         },
-            body: JSON.stringify(data)
-        }
-    ).then((response)=>{
+            body: JSON.stringify(data),
+        })
+        .then((response)=>{
         console.log(response);
         
         if (response.status === 405){
@@ -22,6 +19,10 @@ export const postCheckout = async (data: CheckoutInput) => {
         }else{
             return response.json();
         }
+    })
+    .then ((data)=>{
+        console.log(data.error);
+        
     })
 }
 

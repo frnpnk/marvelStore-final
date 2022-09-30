@@ -65,7 +65,9 @@ const CardForm: FC = () => {
       type: "SET_CARD",
       payload: data
     });
-    postCheckout(state.order)
+    console.log({...state.order, card:data});
+    
+    postCheckout({...state.order, card:data})
 
   };
 

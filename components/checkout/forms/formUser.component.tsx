@@ -49,12 +49,9 @@ const UserForm: FC = () => {
   const { setFocus, handleSubmit } = methods;
 
   const { activeStep, setActiveStep } = useContext(FormContext);
-  console.log(activeStep);
-  
 
   const onSubmit = (data: UserFormData) => {
-    console.log(data);
-    console.log(state);
+
     
     dispatch({
       type: "SET_USER",
@@ -67,7 +64,7 @@ const UserForm: FC = () => {
 
   useEffect(() => {
     setFocus("name");
-    console.log(activeStep);
+
   });
 
   return (
