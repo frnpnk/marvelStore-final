@@ -1,11 +1,9 @@
-import Button from "@mui/material/Button";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Stepper from "@mui/material/Stepper";
-import { Box, Stack, Step, StepLabel } from "@mui/material";
-import UserForm from "./formUser.component";
-import AdressForm from "./formAdress.component";
-import CardForm from "./formCard.component";
-import FormNavigator from "./formNavigator.component";
+import { Box, Step, StepLabel } from "@mui/material";
+import UserForm from "./forms/formUser.component";
+import AddressForm from "./forms/formAddress.component";
+import CardForm from "./forms/formCard.component";
 import { FormContext } from "./context/FormContext";
 
 const StepperForm = () => {
@@ -16,9 +14,8 @@ const StepperForm = () => {
       <Box sx={{ width: "600px" }}>
         <h2>Checkout</h2>
         {activeStep === 0 && <UserForm />}
-        {activeStep === 1 && <AdressForm />}
+        {activeStep === 1 && <AddressForm />}
         {activeStep === 2 && <CardForm />}
-
         <Stepper activeStep={activeStep}>
           <Step>
             <StepLabel>Datos personales</StepLabel>
@@ -30,7 +27,6 @@ const StepperForm = () => {
             <StepLabel>Datos del pago</StepLabel>
           </Step>
         </Stepper>
-        <FormNavigator/>
       </Box>
     </>
   );

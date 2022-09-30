@@ -1,5 +1,6 @@
 import { FormContext } from "dh-marvel/components/checkout/context/FormContext";
-import StepperForm from "dh-marvel/components/checkout/stepperForm.Component";
+import { OrderProvider } from "dh-marvel/components/checkout/context/OrderContext";
+import StepperForm from "dh-marvel/components/checkout/stepperForm.component";
 import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 import React, { useState } from "react";
 
@@ -10,9 +11,11 @@ const Index= () => {
 
   return (
     <>
+    <OrderProvider>
       <FormContext.Provider value={{activeStep: activeStep, setActiveStep: setActiveStep}} >
         <StepperForm />
       </FormContext.Provider>
+    </OrderProvider>
     </>
   );
 };

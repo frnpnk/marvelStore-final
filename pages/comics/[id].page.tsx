@@ -11,7 +11,6 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Container,
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -20,8 +19,6 @@ import Image from "next/image";
 import Link from "next/link";
 import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
 
-let firstComic = 0;
-let quantityComic = 12;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const comic = await getComic(Number(query.id));
@@ -39,6 +36,10 @@ type Props = {
 };
 
 const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
+  
+  const handleLs = ()=>{localStorage.setItem('selectedcomic', comicDetail.id )}
+
+
   return (
     <>
       <Head>
@@ -79,8 +80,8 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
                 <Typography variant="body2">${comicDetail.oldPrice}</Typography>
               </CardContent>
               <CardActions>
-                <Link href={`/checkout`}>
-                  <Button size="small">COMPRAR</Button>
+                <Link href={`/checkout`} >
+                  <Button size="small" onClick={handleLs}>COMPRAR</Button>
                 </Link>
               </CardActions>
             </Card>

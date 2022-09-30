@@ -2,30 +2,31 @@ import { Box, TextField } from "@mui/material";
 import { FC } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
-type ControledTextInputProps = {
+type ControledPassInputProps = {
   name: string;
   label: string;
   defaultValue?: string;
+
 };
 
-const ControlledTexInput: FC<ControledTextInputProps> = ({
+const ControlledPassInput: FC<ControledPassInputProps> = ({
   name,
   label,
   defaultValue,
 
   
-}: ControledTextInputProps) => {
+}: ControledPassInputProps) => {
   const { control } = useFormContext();
-  const {field: { onChange, value, ref },formState: { errors },} = useController<Record<string, string>,string>({
+  const {field: { onChange, value, ref },formState: { errors },} = useController<Record<string, string>>({
     name: name,
     control,
     defaultValue,
-    
   });
 
   return (
     <Box mb="20px">
       <TextField
+        type="password"
         onChange={onChange}
         value={value}
         label={label}
@@ -37,4 +38,4 @@ const ControlledTexInput: FC<ControledTextInputProps> = ({
     </Box>
   );
 };
-export default ControlledTexInput;
+export default ControlledPassInput;

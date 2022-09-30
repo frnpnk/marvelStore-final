@@ -49,7 +49,7 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
     const params = new URLSearchParams();
     params.set("offset", `${offsetfirstComic}`);
     params.set("limit", `${quantityComic}`);
-    console.log(params.toString());
+    //console.log(params.toString());
     
     fetch(url + params.toString())
       .then((res) => res.json())
