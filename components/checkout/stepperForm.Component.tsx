@@ -25,7 +25,8 @@ const StepperForm:FC = () => {
           </Step>
           <Step>
             <StepLabel>Datos del pago</StepLabel>
-          </Step>
+          </Step> 
+          
         </Stepper>
       </Box>
     </>
