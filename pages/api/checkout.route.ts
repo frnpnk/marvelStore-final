@@ -11,9 +11,9 @@ import {
 
 const serverError = 'error'
 export const invalidAddress = 'invalid'
-export const validCard = '4242 4242 4242 4242'.replace(" ", "");
-export const withoutFundsCard = '4111 4111 4111 4111'.replace(" ", "");
-export const withoutAuthorizationCard = '4000 4000 4000 4000'.replace(" ", "");
+export const validCard = "4242424242424242"//.replace(" ", "");
+export const withoutFundsCard = '4111411141114111'//.replace(" ", "");
+export const withoutAuthorizationCard = '4000400040004000'//.replace(" ", "");
 
 type Data = {
     data: any;

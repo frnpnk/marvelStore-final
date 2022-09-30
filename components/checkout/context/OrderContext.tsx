@@ -36,7 +36,7 @@ export interface setOrderUserType {
   payload: UserFormData;
 }
 
-export interface setOrderAdressType {
+export interface setOrderAddressType {
   type: "SET_ADDRESS";
   payload: addressFormData;
 }
@@ -51,7 +51,7 @@ export interface setOrderComicType {
 
 export type OrderActionType =
   | setOrderUserType
-  | setOrderAdressType
+  | setOrderAddressType
   | setOrderCardType
   | setOrderComicType;
 
@@ -68,7 +68,7 @@ const reducer = (state: OrderState, action: OrderActionType) => {
     case "SET_USER":
       return { ...state, order: { ...state.order, customer: action.payload } };
     case "SET_ADDRESS":
-      return { ...state, order: { ...state.order, customer:{...state.order.customer, adress: action.payload} } };
+      return { ...state, order: { ...state.order, customer:{...state.order.customer, address: action.payload} } };
     case "SET_CARD":
       return { ...state, order: { ...state.order, card: action.payload } };
     case "SET_COMIC":

@@ -15,8 +15,8 @@ export const cardSchema = yup
     number: yup
       .string()
       .required("El numero de tarjeta es requerido")
-      .min(19, "Corrobore la cantidad de caracteres")
-      .max(19, "Corrobore la cantidad de caracteres"),
+      .min(16, "Corrobore la cantidad de caracteres")
+      .max(16, "Corrobore la cantidad de caracteres"),
     nameOnCard: yup
       .string()
       .required("Su nombre completo es requerido")
@@ -33,53 +33,45 @@ export const cardSchema = yup
   .required();
 
 export type cardFormData = {
-  number: string,
-  cvc: string,
-  expDate: string,
-  nameOnCard: string
+  number: string;
+  cvc: string;
+  expDate: string;
+  nameOnCard: string;
 };
-
-
-
-
 const CardForm: FC = () => {
-  
   const { state, dispatch } = useOrder();
-
+  const { setActiveStep } = useContext(FormContext);
+  
   const methods = useForm<cardFormData>({
     resolver: yupResolver(cardSchema),
     defaultValues: {
-      number: "4242 4242 4242 4242",
-      nameOnCard: "señor jhonson",
+      number: "4111411141114111",
+      nameOnCard: "senor jhonson",
       expDate: "1234",
       cvc: "123",
     },
   });
   const { setFocus, handleSubmit } = methods;
-
-  const { activeStep, setActiveStep } = useContext(FormContext);
-
+  let errors={}
   const onSubmit = (data: cardFormData) => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
     dispatch({
       type: "SET_CARD",
-      payload: data
+      payload: data,
     });
-    console.log({...state.order, card:data});
-    
-    postCheckout({...state.order, card:data})
-
+    errors = postCheckout({ ...state.order, card: data }) ;
   };
+
+
 
   useEffect(() => {
     setFocus("number");
-    console.log(state.order);
-  }); 
-
-  const handleBack=()=>{
+    console.log("fucking errosr "+ errors);
+    
+  });
+  const handleBack = () => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
-  }
-  
+  };
+
   return (
     <Stack>
       <FormProvider {...methods}>
