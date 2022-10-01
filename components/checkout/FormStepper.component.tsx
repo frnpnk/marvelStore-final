@@ -5,6 +5,7 @@ import UserForm from "./forms/formUser.component";
 import AddressForm from "./forms/formAddress.component";
 import CardForm from "./forms/formCard.component";
 import { FormContext } from "./context/FormContext";
+import OrderCard from "../orderCard.component";
 
 const FormStepper: FC = () => {
   const {activeStep} = useContext(FormContext)
@@ -26,8 +27,8 @@ const FormStepper: FC = () => {
           <Step>
             <StepLabel>Datos del pago</StepLabel>
           </Step> 
-
         </Stepper>
+        
       </Box>
     </>
   );

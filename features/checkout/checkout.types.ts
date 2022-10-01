@@ -20,6 +20,6 @@ export type CheckoutInput = {
     order: {
         name: string;
         image: string;
-        price: number;
+        price: string;
     }
 }

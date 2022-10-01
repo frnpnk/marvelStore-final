@@ -18,7 +18,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LayoutGeneral from "dh-marvel/components/layouts/layout-general";
-
+import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const comic = await getComic(Number(query.id));
@@ -36,9 +36,21 @@ type Props = {
 };
 
 const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
-  
-  const handleLs = ()=>{localStorage.setItem('selectedcomic', comicDetail.id )}
-
+  const router = useRouter();
+  const imagen = comicDetail.thumbnail.path + ".jpg"
+  const handleLs = () => {
+    localStorage.setItem("selectedcomic", comicDetail.id);
+    router.push({
+      pathname: "/checkout",
+      query: {
+        comicSelected: JSON.stringify({
+          name: comicDetail.title,
+          image: imagen,
+          price: comicDetail.price,
+        }),
+      },
+    });
+  };
 
   return (
     <>
@@ -58,7 +70,7 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
 
           <Grid xs={3} alignItems="center">
             <Image
-              src={comicDetail.thumbnail.path + ".jpg"}
+              src={imagen}
               width="245px"
               alt="book cover"
               height="350px"
@@ -75,14 +87,14 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
                   {comicDetail.title}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Antes: ${comicDetail.oldPrice}
+                  Antes: ${comicDetail.oldPrice} 
                 </Typography>
-                <Typography variant="body2">${comicDetail.oldPrice}</Typography>
+                <Typography variant="body2">${comicDetail.price}</Typography>
               </CardContent>
               <CardActions>
-                <Link href={`/checkout`} >
-                  <Button size="small" onClick={handleLs}>COMPRAR</Button>
-                </Link>
+                <Button size="small" onClick={handleLs}  disabled={comicDetail.stock===0} >
+                {comicDetail.stock===0?"SIN STOCK DISPONIBLE":"COMPRAR"}
+                </Button>
               </CardActions>
             </Card>
           </Grid>

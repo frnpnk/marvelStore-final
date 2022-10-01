@@ -14,13 +14,13 @@ import { UserFormData } from "../forms/formUser.component";
 export interface OrderDataType {
   customer: UserFormData;
   card: cardFormData;
-  order: ComiDataType;
+  order: ComicDataType;
 }
 
-export interface ComiDataType {
+export interface ComicDataType {
   name: string;
   image: string;
-  price: number;
+  price: string;
 }
 
 export interface OrderState {
@@ -46,7 +46,7 @@ export interface setOrderCardType {
 }
 export interface setOrderComicType {
   type: "SET_COMIC";
-  payload: ComiDataType;
+  payload: ComicDataType;
 }
 
 export type OrderActionType =
@@ -59,7 +59,7 @@ const initialStore: OrderState = {
   order: {
     customer: {} as UserFormData,
     card: {} as cardFormData,
-    order: {} as ComiDataType,
+    order: {} as ComicDataType,
   },
 };
 

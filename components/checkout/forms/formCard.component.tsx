@@ -42,22 +42,16 @@ export type cardFormData = {
   nameOnCard: string;
 };
 
-
 const CardForm: FC = () => {
   const { state, dispatch } = useOrder();
   const { setActiveStep } = useContext(FormContext);
-  const [open, setOpen] = useState(false)
-  const [dataPost, setDataPost] = useState()
-  const [message, setMessage] = useState("")
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
-
-
-
-  
   const methods = useForm<cardFormData>({
     resolver: yupResolver(cardSchema),
     defaultValues: {
-      number: "4111411141114111",
+      number: "4242424242424242",
       nameOnCard: "senor jhonson",
       expDate: "1234",
       cvc: "123",
@@ -65,57 +59,41 @@ const CardForm: FC = () => {
   });
   const { setFocus, handleSubmit } = methods;
 
-
-
   const onSubmit = async (data: cardFormData) => {
     dispatch({
       type: "SET_CARD",
       payload: data,
     });
 
-   postCheckout({ ...state.order, card: data })
-  
+    postCheckout({ ...state.order, card: data });
   };
 
- const postCheckout = async (dataPost: CheckoutInput) => {
+  const postCheckout = async (dataPost: CheckoutInput) => {
     await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataPost),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataPost),
     })
-        .then((response) => {
-            if (response.status === 405) {
-                console.log("ERROR_METHOD_NOT_ALLOWED");
-            } else {
-                return response.json();
-            }
-        })
-        .then((res) => {
-            console.log(res);
-            if (res.error) {
-              setOpen(true)
-              setMessage(res.message)
-                return (
-                    res.message
-                )
-            } else {
-                router.push({
-                    pathname: '/confirmacion-compra',
-                    query: res
-                })
-            }
-        })
-}
-
-
-
-
-
-
-
-
+      .then((response) => {
+        if (response.status === 405) {
+          console.log("ERROR_METHOD_NOT_ALLOWED");
+        } else {
+          return response.json();
+        }
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.error) {
+          setOpen(true);
+          setMessage(res.message);
+          return res.message;
+        } else {
+          router.push("/confirmacion-compra");
+        }
+      });
+  };
 
   useEffect(() => {
     setFocus("number");
@@ -145,17 +123,6 @@ const CardForm: FC = () => {
       </IconButton>
     </>
   );
-
-
-
-
-
-
-
-
-
-
-
 
   return (
     <Stack>
@@ -204,7 +171,6 @@ const CardForm: FC = () => {
         action={action}
       />
     </Stack>
-
   );
 };
 
