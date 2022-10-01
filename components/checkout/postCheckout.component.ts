@@ -4,7 +4,7 @@ import router from "next/router";
 
 
 
-export const postCheckout = async (data: CheckoutInput | any) => {
+export const postCheckout = async (data: CheckoutInput) => {
     await fetch("/api/checkout", {
         method: "POST",
         headers: {
@@ -19,29 +19,16 @@ export const postCheckout = async (data: CheckoutInput | any) => {
                 return response.json();
             }
         })
-        .then((data) => {
-            console.log(data.error);
-            if (data.error) {
-                switch (data.error) {
-                    case "ERROR_INCORRECT_ADDRESS":
-                        console.log('direccion incorrecta');
-                        break
-                    case "ERROR_CARD_WITHOUT_FUNDS":
-                        console.log('sinfondos');
-                        break
-                    case "ERROR_CARD_WITHOUT_AUTHORIZATION":
-                        console.log('sin autorizacionon');
-                        break
-                    case "ERROR_CARD_DATA_INCORRECT":
-                        console.log('datos de tarjeta incorrectos');
-                        break
-                    default:
-                        console.log("new error");
-                        break
-                }
+        .then((res) => {
+            console.log(res);
+            if (res.error) {
+                return (
+                    res.message
+                )
             } else {
                 router.push({
-                    pathname: '/confirmacion-compra'
+                    pathname: '/confirmacion-compra',
+                    query: res
                 })
             }
         })

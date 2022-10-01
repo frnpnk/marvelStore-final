@@ -38,8 +38,7 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
   const [page, setPage] = useState(1);
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    console.log(page);
-    console.log(offsetfirstComic);
+
     
   };
   const offsetfirstComic =((page-1)* quantityComic );

@@ -1,14 +1,17 @@
 import { Stack } from "@mui/system";
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import ControlledTexInput from "../controlledTextInput";
 import ControlledPassInput from "../controlledPassInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton, Snackbar } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 import { useOrder } from "../context/OrderContext";
-import { postCheckout } from "../postCheckout.component";
+import router from "next/router";
+import React from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import { CheckoutInput } from "dh-marvel/features/checkout/checkout.types";
 
 export const cardSchema = yup
   .object({
@@ -38,9 +41,18 @@ export type cardFormData = {
   expDate: string;
   nameOnCard: string;
 };
+
+
 const CardForm: FC = () => {
   const { state, dispatch } = useOrder();
   const { setActiveStep } = useContext(FormContext);
+  const [open, setOpen] = useState(false)
+  const [dataPost, setDataPost] = useState()
+  const [message, setMessage] = useState("")
+
+
+
+
   
   const methods = useForm<cardFormData>({
     resolver: yupResolver(cardSchema),
@@ -52,25 +64,98 @@ const CardForm: FC = () => {
     },
   });
   const { setFocus, handleSubmit } = methods;
-  let errors={}
-  const onSubmit = (data: cardFormData) => {
+
+
+
+  const onSubmit = async (data: cardFormData) => {
     dispatch({
       type: "SET_CARD",
       payload: data,
     });
-    errors = postCheckout({ ...state.order, card: data }) ;
+
+   postCheckout({ ...state.order, card: data })
+  
   };
+
+ const postCheckout = async (dataPost: CheckoutInput) => {
+    await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataPost),
+    })
+        .then((response) => {
+            if (response.status === 405) {
+                console.log("ERROR_METHOD_NOT_ALLOWED");
+            } else {
+                return response.json();
+            }
+        })
+        .then((res) => {
+            console.log(res);
+            if (res.error) {
+              setOpen(true)
+              setMessage(res.message)
+                return (
+                    res.message
+                )
+            } else {
+                router.push({
+                    pathname: '/confirmacion-compra',
+                    query: res
+                })
+            }
+        })
+}
+
+
+
+
+
+
 
 
 
   useEffect(() => {
     setFocus("number");
-    console.log("fucking errosr "+ errors);
-    
   });
   const handleBack = () => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
   };
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <Stack>
@@ -111,7 +196,15 @@ const CardForm: FC = () => {
           </Stack>
         </form>
       </FormProvider>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={message}
+        action={action}
+      />
     </Stack>
+
   );
 };
 

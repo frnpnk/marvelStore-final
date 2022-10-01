@@ -8,7 +8,7 @@ import { Box, Button } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 import { useOrder } from "../context/OrderContext";
 import { addressFormData } from "./formAddress.component";
-
+ 
 export const userSchema = yup
   .object({
     name: yup
@@ -91,6 +91,7 @@ const UserForm: FC = () => {
           </form>
         </FormProvider>
       </Stack>
+      
     </>
   );
 };
