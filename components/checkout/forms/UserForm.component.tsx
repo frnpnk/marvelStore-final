@@ -1,7 +1,7 @@
 import { Stack } from "@mui/system";
 import { FC, useEffect, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import ControlledTexInput from "../controlledTextInput";
+import ControlledTexInput from "../controlledTexInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Grid } from "@mui/material";
@@ -35,18 +35,17 @@ export type UserFormData = {
 
 const UserForm: FC = () => {
   const { state, dispatch } = useOrder();
+  const { activeStep, setActiveStep } = useContext(FormContext);
 
   const methods = useForm<UserFormData>({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      name: "señor",
-      lastname: "Jhonson",
-      email: "Hola@SrJhonson.com",
+      name: "",
+      lastname: "",
+      email: ""
     },
   });
   const { setFocus, handleSubmit } = methods;
-
-  const { activeStep, setActiveStep } = useContext(FormContext);
 
   const onSubmit = (data: UserFormData) => {
     dispatch({
@@ -80,11 +79,12 @@ const UserForm: FC = () => {
               </Grid>
             </Box>
             <Stack direction="row" mt={2}>
-              <Button disabled={true} sx={{ mr: 1 }}>
+              <Button name="atras" disabled={true} sx={{ mr: 1 }}>
                 Atras
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
               <Button
+                name="siguiente"
                 variant="contained"
                 onClick={handleSubmit(onSubmit)}
                 sx={{ mr: 1 }}

@@ -9,7 +9,7 @@ import {
 } from "react";
 import { addressFormData } from "../forms/formAddress.component";
 import { cardFormData } from "../forms/formCard.component";
-import { UserFormData } from "../forms/formUser.component";
+import { UserFormData } from "../forms/UserForm.component";
 
 export interface OrderDataType {
   customer: UserFormData;

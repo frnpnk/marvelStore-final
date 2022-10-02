@@ -2,12 +2,12 @@ import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 import { NextPage } from "next";
 import React from "react";
 
-import CheckoutConfirmaction from "dh-marvel/components/CheckoutConfirmaction.component";
+import CheckoutConfirmation from "dh-marvel/components/checkout/CheckoutConfirmation.component";
 
 const Index: NextPage = () => {
   return (
     <>
-      <CheckoutConfirmaction />
+      <CheckoutConfirmation />
     </>
   );
 };

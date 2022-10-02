@@ -14,6 +14,7 @@ const OrderCard: FC<CardProps> = (props) => {
     <Box>
       <Card variant="outlined" sx={{ maxWidth: 300 }}>
         <CardMedia
+          sx={{ objectFit: "contain" }}
           component="img"
           height="300"
           image={props.image}

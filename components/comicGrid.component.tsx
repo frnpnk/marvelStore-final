@@ -9,6 +9,7 @@ import {
   CardActions,
   Card,
 } from "@mui/material";
+import { sizing } from '@mui/system';
 import Link from "next/link";
 
 interface Props {
@@ -21,8 +22,10 @@ const ComicGrid: FC<Props> = ({ results }) => {
         {results?.map((d) => (
           
             <Grid item xs={12} md={4} key={d.id}>
-              <Card sx={{ minWidth: 400 }}>
+              <Card sx={{ minWidth: 400 }  }>
+                
                 <CardMedia
+                  sx={{objectFit: "contain"}}
                   component="img"
                   height="194"
                   src={d.thumbnail.path + ".jpg"}

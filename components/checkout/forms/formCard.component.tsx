@@ -1,7 +1,7 @@
 import { Stack } from "@mui/system";
 import { FC, useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import ControlledTexInput from "../controlledTextInput";
+import ControlledTexInput from "../controlledTexInput";
 import ControlledPassInput from "../controlledPassInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";

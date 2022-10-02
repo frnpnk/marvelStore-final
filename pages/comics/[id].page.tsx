@@ -68,7 +68,7 @@ const ComicDetails: NextPage<Props> = ({ comicDetail }) => {
             </Typography>
           </Grid>
 
-          <Grid xs={3} alignItems="center">
+          <Grid xs={3} alignItems="center" sx={{objectFit: "contain"}}>
             <Image
               src={imagen}
               width="245px"

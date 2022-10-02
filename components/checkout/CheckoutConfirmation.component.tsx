@@ -6,7 +6,7 @@ import { Box, Card, CardContent, Grid, Paper } from "@mui/material";
 import OrderCard from "dh-marvel/components/orderCard.component";
 import { useRouter } from "next/router";
 
-const CheckoutConfirmaction: FC = () => {
+const CheckoutConfirmation: FC = () => {
   const { state, dispatch } = useOrder();
   const [render, setRender] = useState(false)
   const router = useRouter();
@@ -93,4 +93,4 @@ const CheckoutConfirmaction: FC = () => {
   );
 };
 
-export default CheckoutConfirmaction;
+export default CheckoutConfirmation;

@@ -59,14 +59,15 @@ const CharacterDetails: NextPage<Props> = ({ characterDetail }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box>
+      <Box margin={2}>
         <Grid container spacing={2}>
           <Container>
             <Typography>{characterDetail.name}</Typography>
           </Container>
 
-          <Box>
+          <Box sx={{objectFit: "contain"}}>
             <Image
+            
               src={characterDetail.thumbnail.path + ".jpg"}
               width="350px"
               alt="book cover"

@@ -37,6 +37,9 @@
       ],
       "dh-marvel/test/*": [
         "test/*"
+      ],
+      "dh-marvel/testUtils/*": [
+        "test/testUtils/*"
       ]
     }
   },

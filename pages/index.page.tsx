@@ -39,7 +39,7 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
 
-    
+   
   };
   const offsetfirstComic =((page-1)* quantityComic );
 
@@ -48,7 +48,7 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
     const params = new URLSearchParams();
     params.set("offset", `${offsetfirstComic}`);
     params.set("limit", `${quantityComic}`);
-    //console.log(params.toString());
+    
     
     fetch(url + params.toString())
       .then((res) => res.json())
@@ -56,6 +56,7 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
       .catch((e) => {
         console.log(e);
       });
+
   }, [page, offsetfirstComic]);
 
   return (
@@ -68,7 +69,7 @@ const Index: NextPage<Props> = ({ comicsPage }) => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} textAlign="center">
-            <h1>Comics {}</h1>
+            <h1>Comics</h1>
           </Grid>
           <Grid item xs={12} display='flex' justifyContent="center">
             <Pagination count={pages} page={page} onChange={handleChange} />

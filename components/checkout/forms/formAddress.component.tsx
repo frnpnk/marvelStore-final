@@ -4,7 +4,7 @@ import { FC, useContext, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import ControlledTexInput from "../controlledTextInput";
+import ControlledTexInput from "../controlledTexInput";
 import { FormContext } from "../context/FormContext";
 import { useOrder } from "../context/OrderContext";
 
