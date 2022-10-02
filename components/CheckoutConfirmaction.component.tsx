@@ -2,7 +2,7 @@ import { useOrder } from "dh-marvel/components/checkout/context/OrderContext";
 
 import React, { FC, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import { Card, CardContent, Grid } from "@mui/material";
+import { Box, Card, CardContent, Grid, Paper } from "@mui/material";
 import OrderCard from "dh-marvel/components/orderCard.component";
 import { useRouter } from "next/router";
 
@@ -22,10 +22,13 @@ const CheckoutConfirmaction: FC = () => {
 
       <>
         <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} color="#015f36">
-            <Typography textAlign={"center"} variant="h2" color="success">
+          <Grid item xs={11} >
+              <Paper sx={{ bgcolor: '#087502' }} >
+                <Typography textAlign={"center"} variant="h3" color="white">
               FELICITACIONES
             </Typography>
+
+          </Paper>
           </Grid>
     
           <Grid

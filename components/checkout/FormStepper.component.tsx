@@ -12,11 +12,8 @@ const FormStepper: FC = () => {
 
   return (
     <>
-      <Box sx={{ width: "600px" }}>
+      <Box >
         <h2>Checkout</h2>
-        {activeStep === 0 && <UserForm />}
-        {activeStep === 1 && <AddressForm />}
-        {activeStep === 2 && <CardForm />}
         <Stepper activeStep={activeStep}>
           <Step>
             <StepLabel>Datos personales</StepLabel>
@@ -28,6 +25,9 @@ const FormStepper: FC = () => {
             <StepLabel>Datos del pago</StepLabel>
           </Step> 
         </Stepper>
+        {activeStep === 0 && <UserForm />}
+        {activeStep === 1 && <AddressForm />}
+        {activeStep === 2 && <CardForm />}
         
       </Box>
     </>

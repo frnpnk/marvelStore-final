@@ -5,7 +5,7 @@ import ControlledTexInput from "../controlledTextInput";
 import ControlledPassInput from "../controlledPassInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, IconButton, Snackbar } from "@mui/material";
+import { Box, Button, IconButton, Snackbar, Grid } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 import { useOrder } from "../context/OrderContext";
 import router from "next/router";
@@ -128,33 +128,45 @@ const CardForm: FC = () => {
     <Stack>
       <FormProvider {...methods}>
         <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <ControlledTexInput
-            name="number"
-            defaultValue=""
-            label="Numero de tarjeta"
-          />
-          <ControlledTexInput
-            name="nameOnCard"
-            defaultValue=""
-            label="Nombre completo"
-          />
-          <ControlledTexInput
-            name="expDate"
-            defaultValue=""
-            label="Fecha de caducidad"
-          />
-          <ControlledPassInput
-            name="cvc"
-            defaultValue=""
-            label="numero de seguridad"
-          />
+        <Box maxWidth={800}>
+          <Grid container spacing={2} padding={"20px"}>
+            <Grid item xs={11}>
+              <ControlledTexInput
+                name="number"
+                defaultValue=""
+                label="Numero de tarjeta"
+              />
+            </Grid>
+            <Grid item xs={11}>
+              <ControlledTexInput
+                name="nameOnCard"
+                defaultValue=""
+                label="Nombre completo"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <ControlledTexInput
+                name="expDate"
+                defaultValue=""
+                label="Fecha de caducidad"
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <ControlledPassInput
+                name="cvc"
+                defaultValue=""
+                label="numero de seguridad"
+              />
+            </Grid>
+          </Grid>
+          </Box>
           <Stack direction="row" mt={2}>
             <Button onClick={handleBack} sx={{ mr: 1 }}>
               Atras
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button
-              color="inherit"
+              variant="contained"
               onClick={handleSubmit(onSubmit)}
               sx={{ mr: 1 }}
             >

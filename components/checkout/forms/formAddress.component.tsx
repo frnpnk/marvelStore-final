@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { Stack } from "@mui/system";
 import { FC, useContext, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -31,18 +31,14 @@ export const addressSchema = yup
   .required();
 
 export type addressFormData = {
-    address1: string,
-    address2: string,
-    city: string,
-    state: string,
-    zipCode: string
-}
-
-
-
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zipCode: string;
+};
 
 const AddressForm: FC = () => {
-  
   const { state, dispatch } = useOrder();
 
   const methods = useForm<addressFormData>({
@@ -52,7 +48,7 @@ const AddressForm: FC = () => {
       address2: "",
       city: "sin city",
       state: "sin state",
-      zipCode: "6666"
+      zipCode: "6666",
     },
   });
   const { setFocus, handleSubmit } = methods;
@@ -62,45 +58,69 @@ const AddressForm: FC = () => {
   const onSubmit = (data: addressFormData) => {
     dispatch({
       type: "SET_ADDRESS",
-      payload: data
+      payload: data,
     });
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
     console.log(data);
     console.log(state);
-    
   };
 
   useEffect(() => {
     setFocus("address1");
   });
-  const handleBack=()=>{
+  const handleBack = () => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
-  }
+  };
 
   return (
     <Stack>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ControlledTexInput name="address1" defaultValue="" label="direccion" />
-          <ControlledTexInput
-            name="address2"
-            defaultValue=""
-            label="departamento"
-          />
-          <ControlledTexInput name="city" defaultValue="" label="ciudad" />
-          <ControlledTexInput name="state" defaultValue="" label="provincia" />
-          <ControlledTexInput
-            name="zipCode"
-            defaultValue=""
-            label="codigo postal"
-          />
+        <Box maxWidth={800}>
+          <Grid container spacing={2} padding={"20px"}>
+            <Grid item xs={7}>
+              <ControlledTexInput
+                name="address1"
+                defaultValue=""
+                label="direccion"
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+              <ControlledTexInput
+                name="address2"
+                defaultValue=""
+                label="departamento"
+              />
+            </Grid>
+
+            <Grid item xs={11}>
+              <ControlledTexInput name="city" defaultValue="" label="ciudad" />
+            </Grid>
+            <Grid item xs={7}>
+              <ControlledTexInput
+                name="state"
+                defaultValue=""
+                label="provincia"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <ControlledTexInput
+                name="zipCode"
+                defaultValue=""
+                label="codigo postal"
+              />
+            </Grid>
+          </Grid>
+          </Box>
           <Stack direction="row" mt={2}>
             <Button onClick={handleBack} sx={{ mr: 1 }}>
               Atras
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button
-              color="inherit"
+              variant="contained"
+      
               onClick={handleSubmit(onSubmit)}
               sx={{ mr: 1 }}
             >

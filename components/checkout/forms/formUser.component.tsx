@@ -4,11 +4,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import ControlledTexInput from "../controlledTextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 import { useOrder } from "../context/OrderContext";
 import { addressFormData } from "./formAddress.component";
- 
+
 export const userSchema = yup
   .object({
     name: yup
@@ -27,13 +27,11 @@ export const userSchema = yup
   .required();
 
 export type UserFormData = {
-  name: string,
-  lastname: string,
-  email: string,
-  address: addressFormData
-  };
-
-
+  name: string;
+  lastname: string;
+  email: string;
+  address: addressFormData;
+};
 
 const UserForm: FC = () => {
   const { state, dispatch } = useOrder();
@@ -51,20 +49,16 @@ const UserForm: FC = () => {
   const { activeStep, setActiveStep } = useContext(FormContext);
 
   const onSubmit = (data: UserFormData) => {
-
-    
     dispatch({
       type: "SET_USER",
-      payload: data
+      payload: data,
     });
 
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
   };
 
-
   useEffect(() => {
     setFocus("name");
-
   });
 
   return (
@@ -72,16 +66,26 @@ const UserForm: FC = () => {
       <Stack>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <ControlledTexInput name="name" label="Nombre" />
-            <ControlledTexInput name="lastname" label="Apellido" />
-            <ControlledTexInput name="email" label="email" />
+            <Box maxWidth={800}>
+              <Grid container spacing={2} padding={"20px"}>
+                <Grid item xs={11}>
+                  <ControlledTexInput name="name" label="Nombre" />
+                </Grid>
+                <Grid item xs={11}>
+                  <ControlledTexInput name="lastname" label="Apellido" />
+                </Grid>
+                <Grid item xs={11}>
+                  <ControlledTexInput name="email" label="email" />
+                </Grid>
+              </Grid>
+            </Box>
             <Stack direction="row" mt={2}>
               <Button disabled={true} sx={{ mr: 1 }}>
                 Atras
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
               <Button
-                color="inherit"
+                variant="contained"
                 onClick={handleSubmit(onSubmit)}
                 sx={{ mr: 1 }}
               >
@@ -91,7 +95,6 @@ const UserForm: FC = () => {
           </form>
         </FormProvider>
       </Stack>
-      
     </>
   );
 };
