@@ -3,7 +3,7 @@ import {
   Dispatch,
   FC,
   PropsWithChildren,
-  useContext,
+ 
   useMemo,
   useReducer,
 } from "react";
@@ -98,10 +98,3 @@ export const OrderProvider: FC<PropsWithChildren> = ({ children }) => {
 
 export { OrderContext };
 
-export const useOrder = (): OrderContextState => {
-  const context = useContext(OrderContext);
-  if (!context) {
-    throw new Error("useOrder must be used whitin a orderProvider");
-  }
-  return context;
-};

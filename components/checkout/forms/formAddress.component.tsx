@@ -4,9 +4,9 @@ import { FC, useContext, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import ControlledTexInput from "../controlledTexInput";
-import { FormContext } from "../context/FormContext";
-import { useOrder } from "../context/OrderContext";
+import ControlledTexInput from "dh-marvel/components/checkout/controlledTexInput";
+import { FormContext } from "dh-marvel/components/checkout/context/FormContext";
+import  useOrder  from "dh-marvel/components/checkout/context/useOrder";
 
 export const addressSchema = yup
   .object({
@@ -61,13 +61,12 @@ const AddressForm: FC = () => {
       payload: data,
     });
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
-    console.log(data);
-    console.log(state);
   };
 
   useEffect(() => {
     setFocus("address1");
   });
+  
   const handleBack = () => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
   };

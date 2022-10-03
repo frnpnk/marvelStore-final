@@ -1,4 +1,4 @@
-import { useOrder } from "dh-marvel/components/checkout/context/OrderContext";
+import useOrder from "dh-marvel/components/checkout/context/useOrder";
 
 import React, { FC, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";

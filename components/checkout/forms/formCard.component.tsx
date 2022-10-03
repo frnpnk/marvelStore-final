@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, IconButton, Snackbar, Grid } from "@mui/material";
 import { FormContext } from "../context/FormContext";
-import { useOrder } from "../context/OrderContext";
+import useOrder from "dh-marvel/components/checkout/context/useOrder";
 import router from "next/router";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
@@ -26,7 +26,7 @@ export const cardSchema = yup
       .min(5, "Su nombre debe tener al menos 5 caracteres"),
     expDate: yup
       .string()
-      .required("La fecha de caducidad es requerido")
+      .required("La fecha de caducidad es requerida")
       .min(4, "La fecha de caducidad debe tener al menos 4 caracteres"),
     cvc: yup
       .string()
@@ -128,37 +128,37 @@ const CardForm: FC = () => {
     <Stack>
       <FormProvider {...methods}>
         <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <Box maxWidth={800}>
-          <Grid container spacing={2} padding={"20px"}>
-            <Grid item xs={11}>
-              <ControlledTexInput
-                name="number"
-                defaultValue=""
-                label="Numero de tarjeta"
-              />
+          <Box maxWidth={800}>
+            <Grid container spacing={2} padding={"20px"}>
+              <Grid item xs={11}>
+                <ControlledTexInput
+                  name="number"
+                  defaultValue=""
+                  label="Numero de tarjeta"
+                />
+              </Grid>
+              <Grid item xs={11}>
+                <ControlledTexInput
+                  name="nameOnCard"
+                  defaultValue=""
+                  label="Nombre completo"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ControlledTexInput
+                  name="expDate"
+                  defaultValue=""
+                  label="Fecha de caducidad"
+                />
+              </Grid>
+              <Grid item xs={5}>
+                <ControlledPassInput
+                  name="cvc"
+                  defaultValue=""
+                  label="numero de seguridad"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={11}>
-              <ControlledTexInput
-                name="nameOnCard"
-                defaultValue=""
-                label="Nombre completo"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <ControlledTexInput
-                name="expDate"
-                defaultValue=""
-                label="Fecha de caducidad"
-              />
-            </Grid>
-            <Grid item xs={5}>
-              <ControlledPassInput
-                name="cvc"
-                defaultValue=""
-                label="numero de seguridad"
-              />
-            </Grid>
-          </Grid>
           </Box>
           <Stack direction="row" mt={2}>
             <Button onClick={handleBack} sx={{ mr: 1 }}>

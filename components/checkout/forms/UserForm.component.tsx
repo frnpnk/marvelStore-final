@@ -5,8 +5,8 @@ import ControlledTexInput from "../controlledTexInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Grid } from "@mui/material";
-import { FormContext } from "../context/FormContext";
-import { useOrder } from "../context/OrderContext";
+import { FormContext } from "dh-marvel/components/checkout/context/FormContext";
+import useOrder from "dh-marvel/components/checkout/context/useOrder";
 import { addressFormData } from "./formAddress.component";
 
 export const userSchema = yup
@@ -40,9 +40,9 @@ const UserForm: FC = () => {
   const methods = useForm<UserFormData>({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      name: "",
-      lastname: "",
-      email: ""
+      name: 'Nombre',
+      lastname: 'Apellido',
+      email: "email@email.com",
     },
   });
   const { setFocus, handleSubmit } = methods;
@@ -71,7 +71,7 @@ const UserForm: FC = () => {
                   <ControlledTexInput name="name" label="Nombre" />
                 </Grid>
                 <Grid item xs={11}>
-                  <ControlledTexInput name="lastname" label="Apellido" />
+                  <ControlledTexInput name="Apellido" label="Apellido" />
                 </Grid>
                 <Grid item xs={11}>
                   <ControlledTexInput name="email" label="email" />
