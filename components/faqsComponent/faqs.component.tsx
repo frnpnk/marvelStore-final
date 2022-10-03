@@ -14,7 +14,6 @@ const Faqs: FC<Props> = ({ data }) => {
   return (
 
     <>
-
       {data?.map((d) => (
         <Accordion key={d.id}>
           <AccordionSummary

@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const faqs: NextPage<Props> = (data) => {
+const FaqsPage: NextPage<Props> = (data) => {
   return (
     <>
       <Head>
@@ -49,6 +49,6 @@ const faqs: NextPage<Props> = (data) => {
   );
 };
 
-(faqs as any).layout = LayoutGeneral
+(FaqsPage as any).layout = LayoutGeneral
 
-export default faqs;
+export default FaqsPage;

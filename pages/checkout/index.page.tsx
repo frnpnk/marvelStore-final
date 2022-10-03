@@ -14,7 +14,7 @@ const Index: NextPage = () => {
   const { state, dispatch } = useOrder();
 
   const { comicSelected }: any = router?.query;
-  console.log(comicSelected);
+
 
   useEffect(() => {
     if (comicSelected) {

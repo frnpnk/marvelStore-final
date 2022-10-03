@@ -84,7 +84,7 @@ const CardForm: FC = () => {
         }
       })
       .then((res) => {
-        console.log(res);
+     
         if (res.error) {
           setOpen(true);
           setMessage(res.message);
